@@ -8,21 +8,20 @@ function liSubsequence(arr){
     if (arr.length === 0) return 0;
 
     const dp = Array(arr.length).fill(1);
-    console.log("dp:", dp)
     
     for (let i = 1; i < arr.length; i++) {
-        console.log("i:", i)
+        // console.log("i:", i)
       for (let j = 0; j < i; j++) {
-        console.log('arr[i]',arr[i], 'arr[j]',arr[j], "====", i, j, arr[i] > arr[j])
+        // console.log('arr[i]',arr[i], 'arr[j]',arr[j], "====", i, j, arr[i] > arr[j])
         if (arr[i] > arr[j]) {
-            console.log("-----",dp[i])
+            // console.log("-----",dp[i])
             dp[i] = Math.max(dp[i], dp[j] + 1);
-            console.log("-----mmm",dp[i])
+            // console.log("-----mmm",dp[i])
         }
       }
     }
   
-    console.log("dp end:", dp)
+    // console.log("dp end:", dp)
     return Math.max(...dp);
 }
 

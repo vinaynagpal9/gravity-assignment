@@ -7,6 +7,7 @@ const TodoApp = () => {
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState("all");
 
+  // intial data
   useEffect(() => {
     fetch('https://dummyjson.com/todos')
       .then(res => res.json())
@@ -15,19 +16,23 @@ const TodoApp = () => {
       });
   }, []);
   
+  // store all the todo in localstorage
   useEffect(() => {
     const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
     setTodos(savedTodos);
   }, []);
 
+  // on change
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
+  // add todo
   const addTodo = (newTodo) => {
     setTodos([...todos, newTodo]);
   };
 
+  // mark todo status
   const markTodo = (id) => {
     const updatedTodos = todos.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -35,11 +40,13 @@ const TodoApp = () => {
     setTodos(updatedTodos);
   };
 
+  // delete todo
   const deleteTodo = (id) => {
     const updatedTodos = todos.filter((todo) => todo.id !== id);
     setTodos(updatedTodos);
   };
 
+  // filtered data
   const filteredTodos = todos.filter((todo) => {
     if (filter === "all") return true;
     if (filter === "completed") return todo.completed;
